@@ -29,23 +29,26 @@ public class SidecarAnomalyDetectionService implements AnomalyDetectionService {
             String url = aiServiceUrl + "/predict/anomaly";
             log.info("Calling AI Sidecar at {} for invoice: {}", url, invoice.getInvoiceId());
 
-            // Simple payload mapping
+            // Build payload with all required fields
             Map<String, Object> payload = new HashMap<>();
-            payload.put("invoice_id", invoice.getInvoiceId());
-            payload.put("amount", invoice.getTotalAmount().getAmount());
-            // Add other fields as needed by the Python sidecar
+            payload.put("tenant_id", "default"); // TODO: Extract from security context
+            payload.put("amount", invoice.getTotalAmount().getAmount().doubleValue());
+            payload.put("currency", invoice.getTotalAmount().getCurrency());
+            payload.put("customer_id", invoice.getPartyIdTo());
 
             Map<String, Object> response = restTemplate.postForObject(url, payload, Map.class);
             
-            if (response != null && response.containsKey("is_anomaly")) {
-                boolean isAnomaly = (Boolean) response.get("is_anomaly");
+            if (response != null && response.containsKey("is_anomalous")) {
+                boolean isAnomaly = (Boolean) response.get("is_anomalous");
                 if (isAnomaly) {
-                    log.warn("Anomaly detected for invoice: {}", invoice.getInvoiceId());
+                    log.warn("Anomaly detected for invoice: {} - Reason: {}", 
+                        invoice.getInvoiceId(), 
+                        response.get("reason"));
                 }
                 return isAnomaly;
             }
         } catch (Exception e) {
-            log.error("Failed to call AI Sidecar: {}", e.getMessage());
+            log.error("Failed to call AI Sidecar: {}", e.getMessage(), e);
             // Fail-open: return false if AI service is down
             return false;
         }

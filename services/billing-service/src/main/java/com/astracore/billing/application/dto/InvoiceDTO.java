@@ -12,6 +12,7 @@ public class InvoiceDTO {
     private String invoiceTypeId;
     private UUID partyIdFrom;
     private UUID partyIdTo;
+    private String customerName;
     private LocalDate invoiceDate;
     private LocalDate dueDate;
     private String statusId;

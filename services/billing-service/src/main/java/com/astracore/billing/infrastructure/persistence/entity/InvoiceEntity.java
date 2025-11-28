@@ -29,6 +29,9 @@ public class InvoiceEntity extends BaseEntity {
     @Column(name = "party_id_to", nullable = false)
     private UUID partyIdTo;
 
+    @Column(name = "customer_name")
+    private String customerName;
+
     @Column(name = "invoice_date", nullable = false)
     private LocalDate invoiceDate;
 

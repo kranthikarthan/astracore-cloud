@@ -144,7 +144,10 @@ services:
       - astracore-net
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8081
     container_name: astracore-frontend
     ports:
       - "3000:3000"

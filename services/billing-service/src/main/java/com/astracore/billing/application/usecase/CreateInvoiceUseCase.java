@@ -36,21 +36,24 @@ public class CreateInvoiceUseCase {
         // Ensure bidirectional relationship for lines
         // Ensure bidirectional relationship for lines
         if (entity.getLines() != null) {
-            entity.getLines().forEach(line -> {
+            int seqId = 1;
+            for (com.astracore.billing.infrastructure.persistence.entity.InvoiceLineEntity line : entity.getLines()) {
                 line.setInvoice(entity);
                 if (line.getInvoiceLineId() == null) {
                     line.setInvoiceLineId(UUID.randomUUID());
                 }
-            });
+                if (line.getInvoiceItemSeqId() == null) {
+                    line.setInvoiceItemSeqId(seqId++);
+                }
+            }
         }
 
         // 4. AI Anomaly Check
         boolean isAnomaly = anomalyDetectionService.isAnomalous(domainInvoice);
         if (isAnomaly) {
-            // For now, we just log it. In future, we might set status to REQUIRES_REVIEW
-            // domainInvoice.setStatusId("REQUIRES_REVIEW"); 
-            // entity.setStatusId("REQUIRES_REVIEW");
-            System.out.println("WARNING: Anomaly detected for invoice " + domainInvoice.getInvoiceId());
+            // Set status to REQUIRES_REVIEW for anomalous invoices
+            domainInvoice.setStatusId("REQUIRES_REVIEW");
+            entity.setStatusId("REQUIRES_REVIEW");
         }
 
         // 5. Save
