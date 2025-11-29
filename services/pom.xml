@@ -14,6 +14,7 @@
 
     <modules>
         <module>billing-service</module>
+        <module>gl-service</module>
     </modules>
 
 </project>

@@ -18,6 +18,7 @@ public class CreateInvoiceUseCase {
     private final InvoiceRepository invoiceRepository;
     private final InvoiceMapper invoiceMapper;
     private final com.astracore.billing.domain.service.AnomalyDetectionService anomalyDetectionService;
+    private final com.astracore.billing.domain.service.DomainEventPublisher domainEventPublisher;
 
     @Transactional
     public InvoiceDTO execute(InvoiceDTO inputDTO) {
@@ -33,7 +34,6 @@ public class CreateInvoiceUseCase {
         // 3. Map Domain to Entity
         InvoiceEntity entity = invoiceMapper.toEntity(domainInvoice);
         
-        // Ensure bidirectional relationship for lines
         // Ensure bidirectional relationship for lines
         if (entity.getLines() != null) {
             int seqId = 1;
@@ -59,7 +59,12 @@ public class CreateInvoiceUseCase {
         // 5. Save
         InvoiceEntity savedEntity = invoiceRepository.save(entity);
 
-        // 6. Map back to Domain then DTO
+        // 6. Publish domain events (e.g., InvoiceIssued)
+        // TODO: Replace hard-coded tenant with real tenant resolution from security context
+        domainInvoice.markIssued("default");
+        domainEventPublisher.publish(domainInvoice.pullDomainEvents());
+
+        // 7. Map back to Domain then DTO
         Invoice savedDomain = invoiceMapper.toDomain(savedEntity);
         return invoiceMapper.toDTO(savedDomain);
     }

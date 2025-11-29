@@ -23,4 +23,25 @@ public class Invoice extends AggregateRoot {
     private String currencyUomId;
     private List<InvoiceLine> lines;
     private Money totalAmount;
+
+    /**
+     * Mark this invoice as issued and register a domain event.
+     *
+     * @param tenantId the tenant to which this invoice belongs
+     */
+    public void markIssued(String tenantId) {
+        com.astracore.domain.billing.InvoiceIssuedEvent event = new com.astracore.domain.billing.InvoiceIssuedEvent(
+                tenantId,
+                this.invoiceId,
+                this.partyIdTo,
+                this.totalAmount != null ? this.totalAmount.getAmount() : null,
+                this.totalAmount != null && this.totalAmount.getCurrency() != null
+                        ? this.totalAmount.getCurrency().getCurrencyCode()
+                        : this.currencyUomId,
+                this.invoiceDate,
+                this.dueDate,
+                Instant.now()
+        );
+        registerEvent(event);
+    }
 }
