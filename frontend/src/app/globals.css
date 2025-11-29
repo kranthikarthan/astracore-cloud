@@ -5,118 +5,415 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 10% 3.9%;
-  --chart-1: 12 76% 61%;
-  --chart-2: 173 58% 39%;
-  --chart-3: 197 37% 24%;
-  --chart-4: 43 74% 66%;
-  --chart-5: 27 87% 67%;
-  --radius: 0.5rem;
+  /* Primary - Celestial Core Blue */
+  --md-sys-color-primary: #00529D;
+  /* 40 */
+  --md-sys-color-on-primary: #FFFFFF;
+  /* 100 */
+  --md-sys-color-primary-container: #D3E6FF;
+  /* 90 */
+  --md-sys-color-on-primary-container: #001A33;
+  /* 10 */
+  --md-sys-color-inverse-primary: #8BC0FF;
+  /* 80 */
+
+  /* Secondary - Cosmic Magenta */
+  --md-sys-color-secondary: #93018F;
+  /* 40 */
+  --md-sys-color-on-secondary: #FFFFFF;
+  /* 100 */
+  --md-sys-color-secondary-container: #F9D7F6;
+  /* 90 */
+  --md-sys-color-on-secondary-container: #30002D;
+  /* 10 */
+
+  /* Tertiary - Solar Amber */
+  --md-sys-color-tertiary: #B48B00;
+  /* 40 */
+  --md-sys-color-on-tertiary: #FFFFFF;
+  /* 100 */
+  --md-sys-color-tertiary-container: #FAECC7;
+  /* 90 */
+  --md-sys-color-on-tertiary-container: #332800;
+  /* 10 */
+
+  /* Error - Standard Red */
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
+
+  /* Neutral - Nebula Gray */
+  --md-sys-color-background: #FCFCFD;
+  /* 99 */
+  --md-sys-color-on-background: #1A1A1D;
+  /* 10 */
+  --md-sys-color-surface: #FCFCFD;
+  /* 99 */
+  --md-sys-color-on-surface: #1A1A1D;
+  /* 10 */
+
+  /* Surface Variants - Using Orion Steel (Neutral Variant) */
+  --md-sys-color-surface-variant: #ECECF3;
+  /* NV 90 */
+  --md-sys-color-on-surface-variant: #474750;
+  /* NV 30 */
+  --md-sys-color-outline: #72727D;
+  /* NV 50 */
+  --md-sys-color-outline-variant: #D9D9E2;
+  /* NV 80 */
+
+  /* Surface Tint - For elevation tinting */
+  --md-sys-color-surface-tint: #00529D;
+  /* Primary 40 */
+
+  /* Inverse */
+  --md-sys-color-inverse-surface: #2C2C2F;
+  /* N 20 */
+  --md-sys-color-inverse-on-surface: #F4F4F5;
+  /* N 95 */
+
+  /* Surface Container (Elevation) */
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  /* 100 */
+  --md-sys-color-surface-container-low: #F4F4F5;
+  /* N 95 */
+  --md-sys-color-surface-container: #E9E9EA;
+  /* N 90 */
+  --md-sys-color-surface-container-high: #D2D2D3;
+  /* N 80 */
+  --md-sys-color-surface-container-highest: #AEAEAF;
+  /* N 70 */
+
+  /* Shadow and Scrim */
+  --md-sys-color-scrim: rgba(0, 0, 0, 0.32);
+  --md-sys-color-shadow: rgba(0, 0, 0, 0.2);
+
+  /* Elevation Shadows (Material You M3) */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-4: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-5: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
 }
 
 .dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
-  --chart-1: 220 70% 50%;
-  --chart-2: 160 60% 45%;
-  --chart-3: 30 80% 55%;
-  --chart-4: 280 65% 60%;
-  --chart-5: 340 75% 55%;
+  /* Primary - Celestial Core Blue */
+  --md-sys-color-primary: #8BC0FF;
+  /* 80 */
+  --md-sys-color-on-primary: #002E57;
+  /* 20 */
+  --md-sys-color-primary-container: #00407A;
+  /* 30 */
+  --md-sys-color-on-primary-container: #D3E6FF;
+  /* 90 */
+  --md-sys-color-inverse-primary: #00529D;
+  /* 40 */
+
+  /* Secondary - Cosmic Magenta */
+  --md-sys-color-secondary: #F19CE7;
+  /* 80 */
+  --md-sys-color-on-secondary: #51004E;
+  /* 20 */
+  --md-sys-color-secondary-container: #72006F;
+  /* 30 */
+  --md-sys-color-on-secondary-container: #F9D7F6;
+  /* 90 */
+
+  /* Tertiary - Solar Amber */
+  --md-sys-color-tertiary: #F8DD94;
+  /* 80 */
+  --md-sys-color-on-tertiary: #604900;
+  /* 20 */
+  --md-sys-color-tertiary-container: #8A6A00;
+  /* 30 */
+  --md-sys-color-on-tertiary-container: #FAECC7;
+  /* 90 */
+
+  /* Error */
+  --md-sys-color-error: #FFB4AB;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000A;
+  --md-sys-color-on-error-container: #FFDAD6;
+
+  /* Neutral - Nebula Gray */
+  --md-sys-color-background: #1A1A1D;
+  /* 10 */
+  --md-sys-color-on-background: #E9E9EA;
+  /* 90 */
+  --md-sys-color-surface: #1A1A1D;
+  /* 10 */
+  --md-sys-color-on-surface: #E9E9EA;
+  /* 90 */
+
+  /* Surface Variants - Using Orion Steel (Neutral Variant) */
+  --md-sys-color-surface-variant: #474750;
+  /* NV 30 */
+  --md-sys-color-on-surface-variant: #D9D9E2;
+  /* NV 80 */
+  --md-sys-color-outline: #93939F;
+  /* NV 60 */
+  --md-sys-color-outline-variant: #474750;
+  /* NV 30 */
+
+  /* Surface Tint - For elevation tinting */
+  --md-sys-color-surface-tint: #8BC0FF;
+  /* Primary 80 */
+
+  /* Inverse */
+  --md-sys-color-inverse-surface: #E9E9EA;
+  /* N 90 */
+  --md-sys-color-inverse-on-surface: #2C2C2F;
+  /* N 20 */
+
+  /* Surface Container (Elevation) */
+  --md-sys-color-surface-container-lowest: #000000;
+  /* 0 */
+  --md-sys-color-surface-container-low: #1A1A1D;
+  /* N 10 */
+  --md-sys-color-surface-container: #2C2C2F;
+  /* N 20 */
+  --md-sys-color-surface-container-high: #3D3D40;
+  /* N 30 */
+  --md-sys-color-surface-container-highest: #515154;
+  /* N 40 */
+
+  /* Shadow and Scrim */
+  --md-sys-color-scrim: rgba(0, 0, 0, 0.32);
+  --md-sys-color-shadow: rgba(0, 0, 0, 0.2);
+
+  /* Elevation Shadows (Material You M3) */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-4: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-5: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
 }
 
 @theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-chart-1: hsl(var(--chart-1));
-  --color-chart-2: hsl(var(--chart-2));
-  --color-chart-3: hsl(var(--chart-3));
-  --color-chart-4: hsl(var(--chart-4));
-  --color-chart-5: hsl(var(--chart-5));
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  /* Map Material You tokens to Tailwind colors */
+  --color-primary: var(--md-sys-color-primary);
+  --color-on-primary: var(--md-sys-color-on-primary);
+  --color-primary-container: var(--md-sys-color-primary-container);
+  --color-on-primary-container: var(--md-sys-color-on-primary-container);
+
+  --color-secondary: var(--md-sys-color-secondary);
+  --color-on-secondary: var(--md-sys-color-on-secondary);
+  --color-secondary-container: var(--md-sys-color-secondary-container);
+  --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
+
+  --color-tertiary: var(--md-sys-color-tertiary);
+  --color-on-tertiary: var(--md-sys-color-on-tertiary);
+  --color-tertiary-container: var(--md-sys-color-tertiary-container);
+  --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+
+  --color-error: var(--md-sys-color-error);
+  --color-on-error: var(--md-sys-color-on-error);
+  --color-error-container: var(--md-sys-color-error-container);
+  --color-on-error-container: var(--md-sys-color-on-error-container);
+
+  --color-background: var(--md-sys-color-background);
+  --color-on-background: var(--md-sys-color-on-background);
+  --color-surface: var(--md-sys-color-surface);
+  --color-on-surface: var(--md-sys-color-on-surface);
+
+  --color-surface-variant: var(--md-sys-color-surface-variant);
+  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
+  --color-outline: var(--md-sys-color-outline);
+  --color-outline-variant: var(--md-sys-color-outline-variant);
+
+  --color-inverse-surface: var(--md-sys-color-inverse-surface);
+  --color-inverse-on-surface: var(--md-sys-color-inverse-on-surface);
+  --color-inverse-primary: var(--md-sys-color-inverse-primary);
+
+  --color-surface-container-lowest: var(--md-sys-color-surface-container-lowest);
+  --color-surface-container-low: var(--md-sys-color-surface-container-low);
+  --color-surface-container: var(--md-sys-color-surface-container);
+  --color-surface-container-high: var(--md-sys-color-surface-container-high);
+  --color-surface-container-highest: var(--md-sys-color-surface-container-highest);
+
+  --color-surface-tint: var(--md-sys-color-surface-tint);
+  --color-scrim: var(--md-sys-color-scrim);
+  --color-shadow: var(--md-sys-color-shadow);
+
+  /* Elevation Utilities */
+  --shadow-elevation-0: var(--md-sys-elevation-0);
+  --shadow-elevation-1: var(--md-sys-elevation-1);
+  --shadow-elevation-2: var(--md-sys-elevation-2);
+  --shadow-elevation-3: var(--md-sys-elevation-3);
+  --shadow-elevation-4: var(--md-sys-elevation-4);
+  --shadow-elevation-5: var(--md-sys-elevation-5);
+
+  /* Material You Shape Tokens */
+  --md-sys-shape-corner-none: 0px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 20px;
+  --md-sys-shape-corner-extra-large-top: 20px 20px 0px 0px;
+  --md-sys-shape-corner-large-end: 0px 16px 16px 0px;
+  --md-sys-shape-corner-large-start: 16px 0px 0px 16px;
+  --md-sys-shape-corner-large-top: 16px 16px 0px 0px;
+  --md-sys-shape-corner-medium-end: 0px 12px 12px 0px;
+  --md-sys-shape-corner-medium-start: 12px 0px 0px 12px;
+  --md-sys-shape-corner-medium-top: 12px 12px 0px 0px;
+  --md-sys-shape-corner-small-end: 0px 8px 8px 0px;
+  --md-sys-shape-corner-small-start: 8px 0px 0px 8px;
+  --md-sys-shape-corner-small-top: 8px 8px 0px 0px;
+  --md-sys-shape-corner-full: 9999px;
+
+  /* Tailwind Shape Utilities */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-3xl: 28px;
+  --radius-full: 9999px;
+
+  /* Material You Motion Tokens */
+  --md-sys-motion-duration-short1: 50ms;
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium1: 250ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-medium3: 350ms;
+  --md-sys-motion-duration-medium4: 400ms;
+  --md-sys-motion-duration-long1: 450ms;
+  --md-sys-motion-duration-long2: 500ms;
+  --md-sys-motion-duration-long3: 550ms;
+  --md-sys-motion-duration-long4: 600ms;
+  --md-sys-motion-duration-extra-long1: 700ms;
+  --md-sys-motion-duration-extra-long2: 800ms;
+  --md-sys-motion-duration-extra-long3: 900ms;
+  --md-sys-motion-duration-extra-long4: 1000ms;
+
+  /* Material You Easing Curves */
+  --md-sys-motion-easing-linear: linear;
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.3, 0.0, 1.0, 1.0);
+  --md-sys-motion-easing-standard-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0.0, 0.8, 0.15);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+
+  /* Animations */
+  --animate-ripple: ripple 600ms var(--md-sys-motion-easing-standard);
+  --animate-fade-through: fade-through 300ms var(--md-sys-motion-easing-standard);
+  --animate-standard: var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
+  --animate-emphasized: var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized);
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 0.3;
+    }
+
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-through {
+    0% {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-*/
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-outline-variant, currentColor);
   }
 }
 
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
+@layer utilities {
+  /* Elevation Utilities */
+  .elevation-0 {
+    box-shadow: var(--md-sys-elevation-0);
   }
-  @media (width >= 1400px) {
-    max-width: 1400px;
+  .elevation-1 {
+    box-shadow: var(--md-sys-elevation-1);
+  }
+  .elevation-2 {
+    box-shadow: var(--md-sys-elevation-2);
+  }
+  .elevation-3 {
+    box-shadow: var(--md-sys-elevation-3);
+  }
+  .elevation-4 {
+    box-shadow: var(--md-sys-elevation-4);
+  }
+  .elevation-5 {
+    box-shadow: var(--md-sys-elevation-5);
+  }
+
+  /* Surface Container Utilities */
+  .surface-container-lowest {
+    background-color: var(--color-surface-container-lowest);
+  }
+  .surface-container-low {
+    background-color: var(--color-surface-container-low);
+  }
+  .surface-container {
+    background-color: var(--color-surface-container);
+  }
+  .surface-container-high {
+    background-color: var(--color-surface-container-high);
+  }
+  .surface-container-highest {
+    background-color: var(--color-surface-container-highest);
+  }
+
+  /* Material You Animation Utilities */
+  .animate-ripple {
+    animation: var(--animate-ripple);
+  }
+  .animate-fade-through {
+    animation: var(--animate-fade-through);
+  }
+  .animate-standard {
+    animation: var(--animate-standard);
+  }
+  .animate-emphasized {
+    animation: var(--animate-emphasized);
+  }
+
+  /* Material You Shape Utilities */
+  .rounded-material-sm {
+    border-radius: var(--md-sys-shape-corner-small);
+  }
+  .rounded-material-md {
+    border-radius: var(--md-sys-shape-corner-medium);
+  }
+  .rounded-material-lg {
+    border-radius: var(--md-sys-shape-corner-large);
+  }
+  .rounded-material-xl {
+    border-radius: var(--md-sys-shape-corner-extra-large);
+  }
+  .rounded-material-full {
+    border-radius: var(--md-sys-shape-corner-full);
   }
 }
 
 body {
   background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-on-background);
+  font-family: 'Google Sans', 'Roboto Flex', sans-serif;
 }

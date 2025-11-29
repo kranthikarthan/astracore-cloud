@@ -9,7 +9,8 @@ import {
     YAxis,
     Tooltip,
 } from "recharts";
-import { ArrowUpRight, DollarSign, Users, CreditCard, Activity } from "lucide-react";
+import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
+import { Avatar } from "@mui/material";
 
 const data = [
     { name: "Jan", total: Math.floor(Math.random() * 5000) + 1000 },
@@ -33,11 +34,11 @@ export function Dashboard() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                        <DollarSign className="h-4 w-4 text-muted-foreground" />
+                        <DollarSign className="h-4 w-4 text-on-surface-variant" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">$45,231.89</div>
-                        <p className="text-xs text-muted-foreground">
+                        <div className="text-2xl font-bold text-on-surface">$45,231.89</div>
+                        <p className="text-xs text-on-surface-variant">
                             +20.1% from last month
                         </p>
                     </CardContent>
@@ -45,11 +46,11 @@ export function Dashboard() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
-                        <Users className="h-4 w-4 text-muted-foreground" />
+                        <Users className="h-4 w-4 text-on-surface-variant" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">+2350</div>
-                        <p className="text-xs text-muted-foreground">
+                        <div className="text-2xl font-bold text-on-surface">+2350</div>
+                        <p className="text-xs text-on-surface-variant">
                             +180.1% from last month
                         </p>
                     </CardContent>
@@ -57,11 +58,11 @@ export function Dashboard() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Sales</CardTitle>
-                        <CreditCard className="h-4 w-4 text-muted-foreground" />
+                        <CreditCard className="h-4 w-4 text-on-surface-variant" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">+12,234</div>
-                        <p className="text-xs text-muted-foreground">
+                        <div className="text-2xl font-bold text-on-surface">+12,234</div>
+                        <p className="text-xs text-on-surface-variant">
                             +19% from last month
                         </p>
                     </CardContent>
@@ -69,11 +70,11 @@ export function Dashboard() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-                        <Activity className="h-4 w-4 text-muted-foreground" />
+                        <Activity className="h-4 w-4 text-on-surface-variant" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">+573</div>
-                        <p className="text-xs text-muted-foreground">
+                        <div className="text-2xl font-bold text-on-surface">+573</div>
+                        <p className="text-xs text-on-surface-variant">
                             +201 since last hour
                         </p>
                     </CardContent>
@@ -89,13 +90,13 @@ export function Dashboard() {
                             <BarChart data={data}>
                                 <XAxis
                                     dataKey="name"
-                                    stroke="#888888"
+                                    stroke="var(--md-sys-color-on-surface-variant)"
                                     fontSize={12}
                                     tickLine={false}
                                     axisLine={false}
                                 />
                                 <YAxis
-                                    stroke="#888888"
+                                    stroke="var(--md-sys-color-on-surface-variant)"
                                     fontSize={12}
                                     tickLine={false}
                                     axisLine={false}
@@ -103,13 +104,18 @@ export function Dashboard() {
                                 />
                                 <Tooltip
                                     cursor={{ fill: 'transparent' }}
-                                    contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                                    contentStyle={{
+                                        borderRadius: '12px',
+                                        border: 'none',
+                                        backgroundColor: 'var(--md-sys-color-surface-container-high)',
+                                        color: 'var(--md-sys-color-on-surface)',
+                                        boxShadow: 'var(--md-sys-elevation-2)',
+                                    }}
                                 />
                                 <Bar
                                     dataKey="total"
-                                    fill="currentColor"
-                                    radius={[4, 4, 0, 0]}
-                                    className="fill-primary"
+                                    fill="var(--md-sys-color-primary)"
+                                    radius={[8, 8, 0, 0]}
                                 />
                             </BarChart>
                         </ResponsiveContainer>
@@ -121,76 +127,37 @@ export function Dashboard() {
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-8">
-                            <div className="flex items-center">
-                                <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <span className="text-xs font-medium">OM</span>
+                            {[
+                                { name: "Olivia Martin", email: "olivia.martin@email.com", amount: "+$1,999.00", initials: "OM" },
+                                { name: "Jackson Lee", email: "jackson.lee@email.com", amount: "+$39.00", initials: "JL" },
+                                { name: "Isabella Nguyen", email: "isabella.nguyen@email.com", amount: "+$299.00", initials: "IN" },
+                                { name: "William Kim", email: "will@email.com", amount: "+$99.00", initials: "WK" },
+                                { name: "Sofia Davis", email: "sofia.davis@email.com", amount: "+$39.00", initials: "SD" },
+                            ].map((person) => (
+                                <div key={person.email} className="flex items-center">
+                                    <Avatar
+                                        sx={{
+                                            width: 36,
+                                            height: 36,
+                                            bgcolor: 'var(--md-sys-color-primary-container)',
+                                            color: 'var(--md-sys-color-on-primary-container)',
+                                            fontSize: '0.75rem',
+                                            fontWeight: 500,
+                                        }}
+                                    >
+                                        {person.initials}
+                                    </Avatar>
+                                    <div className="ml-4 space-y-1 flex-1">
+                                        <p className="text-sm font-medium leading-none text-on-surface">
+                                            {person.name}
+                                        </p>
+                                        <p className="text-sm text-on-surface-variant">
+                                            {person.email}
+                                        </p>
+                                    </div>
+                                    <div className="ml-auto font-medium text-on-surface">{person.amount}</div>
                                 </div>
-                                <div className="ml-4 space-y-1">
-                                    <p className="text-sm font-medium leading-none">
-                                        Olivia Martin
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        olivia.martin@email.com
-                                    </p>
-                                </div>
-                                <div className="ml-auto font-medium">+$1,999.00</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <span className="text-xs font-medium">JL</span>
-                                </div>
-                                <div className="ml-4 space-y-1">
-                                    <p className="text-sm font-medium leading-none">
-                                        Jackson Lee
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        jackson.lee@email.com
-                                    </p>
-                                </div>
-                                <div className="ml-auto font-medium">+$39.00</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <span className="text-xs font-medium">IN</span>
-                                </div>
-                                <div className="ml-4 space-y-1">
-                                    <p className="text-sm font-medium leading-none">
-                                        Isabella Nguyen
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        isabella.nguyen@email.com
-                                    </p>
-                                </div>
-                                <div className="ml-auto font-medium">+$299.00</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <span className="text-xs font-medium">WK</span>
-                                </div>
-                                <div className="ml-4 space-y-1">
-                                    <p className="text-sm font-medium leading-none">
-                                        William Kim
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        will@email.com
-                                    </p>
-                                </div>
-                                <div className="ml-auto font-medium">+$99.00</div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center">
-                                    <span className="text-xs font-medium">SD</span>
-                                </div>
-                                <div className="ml-4 space-y-1">
-                                    <p className="text-sm font-medium leading-none">
-                                        Sofia Davis
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        sofia.davis@email.com
-                                    </p>
-                                </div>
-                                <div className="ml-auto font-medium">+$39.00</div>
-                            </div>
+                            ))}
                         </div>
                     </CardContent>
                 </Card>

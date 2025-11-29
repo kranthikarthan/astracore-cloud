@@ -14,7 +14,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { IconButton, List, ListItem, ListItemButton, ListItemIcon, Tooltip } from "@mui/material";
 import { motion } from "framer-motion";
 
 const navItems = [
@@ -34,40 +34,77 @@ export function Sidebar() {
         <motion.aside
             initial={{ width: 240 }}
             animate={{ width: collapsed ? 64 : 240 }}
-            className="relative flex h-screen flex-col border-r bg-card text-card-foreground"
+            className="relative flex h-screen flex-col border-r border-outline-variant bg-surface-container"
         >
-            <div className="flex h-14 items-center justify-between px-4 border-b">
+            <div className="flex h-14 items-center justify-between px-4 border-b border-outline-variant">
                 {!collapsed && (
-                    <span className="text-lg font-bold tracking-tight">AstraCore</span>
+                    <span className="text-lg font-bold tracking-tight text-on-surface">AstraCore</span>
                 )}
-                <Button
-                    variant="ghost"
-                    size="icon"
+                <IconButton
+                    size="small"
                     onClick={() => setCollapsed(!collapsed)}
-                    className="ml-auto h-8 w-8"
+                    sx={{
+                        borderRadius: '20px',
+                        ml: 'auto',
+                    }}
                 >
                     {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-                </Button>
+                </IconButton>
             </div>
 
-            <nav className="flex-1 space-y-1 p-2">
-                {navItems.map((item) => {
-                    const isActive = pathname === item.href;
-                    return (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={cn(
-                                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                                isActive ? "bg-accent text-accent-foreground" : "text-muted-foreground",
-                                collapsed && "justify-center px-2"
-                            )}
-                        >
-                            <item.icon className="h-5 w-5 shrink-0" />
-                            {!collapsed && <span>{item.name}</span>}
-                        </Link>
-                    );
-                })}
+            <nav className="flex-1 overflow-y-auto p-2">
+                <List sx={{ p: 0 }}>
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href;
+                        const listItem = (
+                            <ListItem key={item.href} disablePadding sx={{ mb: 0.5 }}>
+                                <ListItemButton
+                                    component={Link}
+                                    href={item.href}
+                                    selected={isActive}
+                                    sx={{
+                                        borderRadius: '12px',
+                                        minHeight: 48,
+                                        px: collapsed ? 1.5 : 2,
+                                        justifyContent: collapsed ? 'center' : 'flex-start',
+                                        '&.Mui-selected': {
+                                            backgroundColor: 'var(--md-sys-color-primary-container)',
+                                            color: 'var(--md-sys-color-on-primary-container)',
+                                            '&:hover': {
+                                                backgroundColor: 'var(--md-sys-color-primary-container)',
+                                                opacity: 0.9,
+                                            },
+                                        },
+                                        '&:hover': {
+                                            backgroundColor: 'var(--md-sys-color-surface-container-high)',
+                                        },
+                                    }}
+                                >
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: collapsed ? 0 : 40,
+                                            color: 'inherit',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        <item.icon className="h-5 w-5" />
+                                    </ListItemIcon>
+                                    {!collapsed && (
+                                        <span className="ml-2 text-sm font-medium">{item.name}</span>
+                                    )}
+                                </ListItemButton>
+                            </ListItem>
+                        );
+
+                        return collapsed ? (
+                            <Tooltip key={item.href} title={item.name} placement="right">
+                                {listItem}
+                            </Tooltip>
+                        ) : (
+                            listItem
+                        );
+                    })}
+                </List>
             </nav>
         </motion.aside>
     );
