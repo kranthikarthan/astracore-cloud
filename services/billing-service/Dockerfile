@@ -3,10 +3,8 @@ FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY libs ./libs
-COPY services/pom.xml ./services/pom.xml
-COPY services/billing-service ./services/billing-service
-# Build dependencies first to cache them (optimistic approach, might need more granular copies for true caching)
-# For now, just build the specific module
+COPY services ./services
+# Build only the billing-service module (and any required dependencies)
 RUN mvn clean package -pl services/billing-service -am -DskipTests
 
 # Runtime Stage

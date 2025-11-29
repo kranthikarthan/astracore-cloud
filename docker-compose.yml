@@ -143,6 +143,24 @@ services:
     networks:
       - astracore-net
 
+  gl-service:
+    build:
+      context: .
+      dockerfile: services/gl-service/Dockerfile
+    container_name: astracore-gl-service
+    depends_on:
+      - postgres
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/astracore_db
+      SPRING_DATASOURCE_USERNAME: astracore
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    ports:
+      - "8082:8082"
+    networks:
+      - astracore-net
+
   frontend:
     build:
       context: ./frontend

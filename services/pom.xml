@@ -15,6 +15,7 @@
     <modules>
         <module>billing-service</module>
         <module>gl-service</module>
+        <module>system-tests</module>
     </modules>
 
 </project>
