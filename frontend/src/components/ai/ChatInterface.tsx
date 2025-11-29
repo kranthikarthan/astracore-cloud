@@ -16,7 +16,9 @@ import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 export function ChatInterface() {
-    const { messages, input, handleInputChange, handleSubmit } = useChat() as any;
+    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+        api: '/api/chat',
+    });
     const [isOpen, setIsOpen] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -49,8 +51,8 @@ export function ChatInterface() {
                 )}
             >
                 <Card className="h-[600px] flex flex-col shadow-2xl border-primary/20">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b bg-muted/50">
-                        <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 border-b bg-surface-container-low">
+                        <CardTitle className="text-sm font-medium flex items-center gap-2 text-on-surface">
                             <MessageSquare className="h-4 w-4" />
                             AstraCore Copilot
                         </CardTitle>
@@ -66,7 +68,7 @@ export function ChatInterface() {
                     <CardContent className="flex-1 p-0 overflow-hidden">
                         <div className="h-full overflow-y-auto p-4 space-y-4" ref={scrollRef}>
                             {messages.length === 0 && (
-                                <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground p-4">
+                                <div className="flex flex-col items-center justify-center h-full text-center text-on-surface-variant p-4">
                                     <MessageSquare className="h-12 w-12 mb-4 opacity-20" />
                                     <p className="text-sm">
                                         Hi! I'm your AI assistant. Ask me anything about your invoices,
@@ -80,8 +82,8 @@ export function ChatInterface() {
                                     className={cn(
                                         "flex w-max max-w-[80%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
                                         m.role === "user"
-                                            ? "ml-auto bg-primary text-primary-foreground"
-                                            : "bg-muted"
+                                            ? "ml-auto bg-primary text-on-primary"
+                                            : "bg-surface-container-high text-on-surface"
                                     )}
                                 >
                                     {m.content}
@@ -89,18 +91,19 @@ export function ChatInterface() {
                             ))}
                         </div>
                     </CardContent>
-                    <CardFooter className="p-4 border-t bg-background">
+                    <CardFooter className="p-4 border-t border-outline-variant bg-background">
                         <form
                             onSubmit={handleSubmit}
                             className="flex w-full items-center space-x-2"
                         >
                             <Input
                                 value={input || ''}
-                                onChange={handleInputChange}
+                                onChange={handleInputChange || ((e) => {})}
                                 placeholder="Type a message..."
                                 className="flex-1"
+                                disabled={isLoading}
                             />
-                            <Button type="submit" size="icon" disabled={!input?.trim()}>
+                            <Button type="submit" size="icon" disabled={!input?.trim() || isLoading}>
                                 <Send className="h-4 w-4" />
                             </Button>
                         </form>

@@ -23,6 +23,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
+import { getClientApiUrl, getConnectionErrorMessage } from "@/lib/api"
 import {
     Select,
     SelectContent,
@@ -107,7 +108,13 @@ export default function CreateInvoicePage() {
                 }))
             }
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/invoices`, {
+            const apiUrl = getClientApiUrl();
+            const fullUrl = `${apiUrl}/api/v1/invoices`;
+            
+            console.log('Creating invoice at:', fullUrl);
+            console.log('Payload:', payload);
+
+            const response = await fetch(fullUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -126,7 +133,24 @@ export default function CreateInvoicePage() {
             router.refresh()
         } catch (error: any) {
             console.error('Error creating invoice:', error)
-            alert(error.message || 'Failed to create invoice. Please try again.')
+            console.error('Error details:', {
+                name: error?.name,
+                message: error?.message,
+                stack: error?.stack,
+                apiUrl: getClientApiUrl()
+            })
+            
+            // Provide more specific error messages
+            let errorMessage = 'Failed to create invoice. Please try again.';
+            
+            if (error instanceof TypeError && error.message.includes('fetch')) {
+                errorMessage = getConnectionErrorMessage();
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+            
+            // Use a more user-friendly notification instead of alert
+            alert(errorMessage)
         } finally {
             setIsLoading(false)
         }

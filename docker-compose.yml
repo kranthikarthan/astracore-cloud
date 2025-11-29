@@ -154,6 +154,7 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8081
       NEXT_PUBLIC_AI_URL: http://localhost:8000
+      API_INTERNAL_URL: http://billing-service:8081
     depends_on:
       - billing-service
       - billing-sidecar

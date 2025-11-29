@@ -1,17 +1,42 @@
 import * as React from "react"
-
+import { TextField, TextFieldProps } from "@mui/material"
 import { cn } from "@/lib/utils"
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-    ({ className, type, ...props }, ref) => {
+export interface InputProps extends Omit<TextFieldProps, 'variant' | 'size'> {
+    size?: 'small' | 'medium' | 'large' | 'default' | 'sm' | 'lg';
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+    ({ className, size = 'small', onChange, value, ...props }, ref) => {
+        // Map custom sizes to MUI sizes
+        let muiSize: 'small' | 'medium' = 'small';
+        if (size === 'medium' || size === 'large' || size === 'lg') {
+            muiSize = 'medium';
+        }
+
+        // Ensure onChange is always defined if value is provided
+        const handleChange = onChange || (() => {});
+
         return (
-            <input
-                type={type}
-                className={cn(
-                    "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-                    className
-                )}
+            <TextField
                 ref={ref}
+                variant="outlined"
+                size={muiSize}
+                value={value ?? ''}
+                onChange={handleChange}
+                className={cn(className)}
+                sx={{
+                    '& .MuiOutlinedInput-root': {
+                        borderRadius: '8px',
+                        backgroundColor: 'var(--md-sys-color-surface-container-highest)',
+                        '&:hover': {
+                            backgroundColor: 'var(--md-sys-color-surface-container-high)',
+                        },
+                        '&.Mui-focused': {
+                            backgroundColor: 'var(--md-sys-color-surface-container-highest)',
+                        },
+                    },
+                }}
                 {...props}
             />
         )

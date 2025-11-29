@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowLeft, Loader2 } from "lucide-react"
+import { getClientApiUrl } from "@/lib/api"
 
 interface InvoiceLine {
     invoiceLineId: string | null
@@ -47,7 +48,7 @@ export default function InvoiceDetailPage() {
     useEffect(() => {
         const fetchInvoice = async () => {
             try {
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081"
+                const apiUrl = getClientApiUrl();
                 const response = await fetch(`${apiUrl}/api/v1/invoices/${params.id}`)
 
                 if (!response.ok) {
